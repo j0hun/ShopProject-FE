@@ -1,6 +1,6 @@
-import React, { createContext, useReducer, userContext, useEffect, Children } from "react";
+import React, { createContext, useReducer, userContext, useEffect } from "react";
 
-const cartContext = createContext();
+const CartContext = createContext();
 
 const initialState = {
     cart: JSON.parse(localStorage.getItem('cart')) || [],
@@ -50,9 +50,9 @@ const cartReducer = (state, action) => {
             return { ...state, cart: newCart };
         }
 
-        case 'CLEAT_CART': {
+        case 'CLEAR_CART': {
             localStorage.removeItem('cart');
-            return { ...state, cart: newCart };
+            return { ...state, cart: [] };
         }
 
         default:
@@ -60,7 +60,7 @@ const cartReducer = (state, action) => {
     }
 };
 
-export const CartProcider = ({ Children }) => {
+export const CartProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(cartReducer, initialState);
 
@@ -69,10 +69,10 @@ export const CartProcider = ({ Children }) => {
     }, [state.cart]);
 
     return (
-        <cartContext.Provider value={{cart: state.cart, dispatch}}>
-            {Children}
-        </cartContext.Provider>
+        <CartContext.Provider value={{ cart: state.cart, dispatch }}>
+            {children}
+        </CartContext.Provider>
     )
 }
 
-export const useCart = () => userContext(cartContext);
+export const useCart = () => userContext(CartContext);
