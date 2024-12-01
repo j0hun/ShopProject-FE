@@ -2,7 +2,7 @@ import React from "react";
 
 import '../../style/pagination.css';
 
-const pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -22,4 +22,4 @@ const pagination = ({ currentPage, totalPages, onPageChange }) => {
         </div>
     )
 }
-export default pagination;
+export default Pagination;
