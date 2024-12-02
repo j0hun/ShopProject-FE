@@ -14,6 +14,9 @@ import LoginPage from './component/pages/LoginPage';
 import ProfilePage from './component/pages/ProfilePage';
 import AddressPage from './component/pages/AddressPage';
 import AdminPage from './component/admin/AdminPage';
+import AdminCategoryPage from './component/admin/AdminCategoryPage';
+import AddCategory from './component/admin/AddCategory';
+import EditCategory from './component/admin/EditCategory';
 
 function App() {
   return (
@@ -34,6 +37,10 @@ function App() {
           <Route path='/edit-address' element={<ProtectedRoute element={<AddressPage />} />} />
 
           <Route path='/admin' element={<AdminRoute element={<AdminPage />} />} />
+          <Route path='/admin/categories' element={<AdminRoute element={<AdminCategoryPage />} />} />
+          <Route path='/admin/add-category' element={<AdminRoute element={<AddCategory />} />} />
+          <Route path='/admin/edit-category/:categoryId' element={<AdminRoute element={<EditCategory />} />} />
+
         </Routes>
         <Footer />
       </CartProvider>
