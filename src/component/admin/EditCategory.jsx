@@ -28,7 +28,7 @@ const EditCategory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await ApiService.updateCategory(category, { name });
+            const response = await ApiService.updateCategory(categoryId, { name });
             if (response.status === 200) {
                 setMessage(response.message);
                 setTimeout(() => {
