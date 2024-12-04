@@ -66,7 +66,7 @@ const EditProductPage = () => {
             <h2>Edit Product</h2>
             {message && <div className="message">{message}</div>}
             <input type="file" onChange={handleImageChange}/>
-            {imageUrl && <img srce={imageUrl} alt={name}/>}
+            {imageUrl && <img src={imageUrl} alt={name}/>}
             <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                 <option value="">Select Category</option>
                 {categories.map((category) => (

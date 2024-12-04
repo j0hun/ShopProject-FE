@@ -60,7 +60,7 @@ const ProfilePage = () => {
                             <div>
                                 <p><strong>Street: </strong>{userInfo.address.street}</p>
                                 <p><strong>City: </strong>{userInfo.address.city}</p>
-                                <p><strong>Zip Code: </strong>{userInfo.zipCode}</p>
+                                <p><strong>Zip Code: </strong>{userInfo.address.zipCode}</p>
                             </div>
                         ) : (
                             <p>No Address information available</p>
@@ -73,7 +73,7 @@ const ProfilePage = () => {
                     <ul>
                         {paginatedOrders.map(order => (
                             <li key={order.id}>
-                                <img src={order.product?.imageUrl} alt={order.product.name} />
+                                <img src={`http://localhost:8080${order.product.imageUrl}`} alt={order.product.name} />
                                 <div>
                                     <p><strong>Name: </strong>{order.product.name}</p>
                                     <p><strong>Status: </strong>{order.status}</p>
