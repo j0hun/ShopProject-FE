@@ -23,10 +23,10 @@ const Home = () => {
 
                 if (searchItem) {
                     const response = await ApiService.searchProducts(searchItem)
-                    allProducts = response.ProductList || [];
+                    allProducts = response.productList || [];
                 } else {
-                    const response = await ApiService.getAllProduct();
-                    allProducts = response.ProductList || [];
+                    const response = await ApiService.getAllProducts();
+                    allProducts = response.productList || [];
                 }
 
                 setTotalPages(Math.ceil(allProducts.length / itemsPerPage))
@@ -52,5 +52,6 @@ const Home = () => {
             )}
         </div>
     )
+
 }
 export default Home;

@@ -32,7 +32,7 @@ const ProductList = ({ products }) => {
                 return (
                     <div className="product-item" key={index}>
                         <Link to={`/product/${product.id}`}>
-                            <img src={product.imageUrl} alt={product.name} className="product-image" />
+                            <img src={`http://localhost:8080${product.imageUrl}`} alt={product.name} className="product-image" />
                             <h3>{product.name}</h3>
                             <p>{product.description}</p>
                             <span>${product.price.toFixed(2)}</span>

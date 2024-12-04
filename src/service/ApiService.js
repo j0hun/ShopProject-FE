@@ -13,12 +13,12 @@ export default class ApiService {
     }
 
     static async registerUser(registeration) {
-        const response = await axios.post(`${this.BASE_URL}/auth/register`)
+        const response = await axios.post(`${this.BASE_URL}/auth/register`,registeration)
         return response.data;
     }
 
     static async loginUser(loginDetails) {
-        const response = await axios.post(`${this.BASE_URL}/auth/login`)
+        const response = await axios.post(`${this.BASE_URL}/auth/login`,loginDetails)
         return response.data;
     }
 
@@ -61,7 +61,7 @@ export default class ApiService {
         return response.data;
     }
 
-    static async getAllProductByCategoryId(categoryId) {
+    static async getAllProductsByCategoryId(categoryId) {
         const response = await axios.get(`${this.BASE_URL}/product/get-by-category-id/${categoryId}`)
         return response.data;
     }
