@@ -24,25 +24,26 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const response = await ApiService.loginUser(formData);
+            console.log(response);
             if (response.status === 200) {
-                setMessage(response.message);
-                localStorage.setItem('token', response.response.token);
-                localStorage.setItem('role', response.response.role);
+                setMessage("로그인 성공");
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('role', response.data.role);
                 setTimeout(() => {
                     navigate("/profile")
-                }, 4000)
+                }, 1000)
             }
         } catch (error) {
-            setMessage(error.response?.data.message || error.message || "unable to Login a user");
+            setMessage(error.response?.data.message || error.message || "로그인 할 수 없습니다.");
         }
     }
 
     return (
         <div className="register-page">
-            <h2>Login</h2>
+            <h2>로그인</h2>
             {message && <p className="message">{message}</p>}
             <form onSubmit={handleSubmit}>
-                <label>Email: </label>
+                <label>이메일: </label>
                 <input
                     type="email"
                     name="email"
@@ -50,7 +51,7 @@ const LoginPage = () => {
                     onChange={handleChange}
                     required />
 
-                <label>Password: </label>
+                <label>비밀번호: </label>
                 <input
                     type="password"
                     name="password"
@@ -58,10 +59,10 @@ const LoginPage = () => {
                     onChange={handleChange}
                     required />
 
-                <button type="submit">Login</button>
+                <button type="submit">로그인</button>
 
                 <p className="register-link">
-                    Don't have an account? <a href="/register">Register</a>
+                    계정이 없나요? <a href="/register">회원가입</a>
                 </p>
             </form>
         </div>

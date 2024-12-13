@@ -25,23 +25,23 @@ const RegisterPage = () => {
         try {
             const response = await ApiService.registerUser(formData);
             if (response.status === 200) {
-                setMessage("User Successfully Registered");
+                setMessage("회원가입 성공");
                 setTimeout(() => {
                     navigate("/login");
-                }, 4000);
+                }, 1000);
             }
 
         } catch (error) {
-            setMessage(error.response?.data.message || error.message || 'unable to register a user');
+            setMessage(error.response?.data.message || error.message || '회원가입 할 수 없습니다.');
         }
     }
 
     return (
         <div className="register-page">
-            <h2>Register</h2>
+            <h2>회원가입</h2>
             {message && <p className="message">{message}</p>}
             <form onSubmit={handleSubmit}>
-                <label>Email: </label>
+                <label>이메일: </label>
                 <input
                     type="email"
                     name="email"
@@ -49,7 +49,7 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     required />
 
-                <label>Name: </label>
+                <label>이름: </label>
                 <input
                     type="text"
                     name="name"
@@ -57,7 +57,7 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     required />
 
-                <label>Phone Number: </label>
+                <label>전화번호: </label>
                 <input
                     type="text"
                     name="phoneNumber"
@@ -65,16 +65,17 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     required />
 
-                <label>Password: </label>
+                <label>비밀번호: </label>
                 <input
                     type="password"
                     name="password"
                     value={formData.password}
-                    onAbort={handleChange}
+                    onChange={handleChange}
                     required />
-                <button type="submit">Register</button>
+                    
+                <button type="submit">회원가입</button>
                 <p className="register-link">
-                    Already have an account? <a href="/login">Login</a>
+                    이미 계정이 있나요? <a href="/login">로그인</a>
                 </p>
             </form>
         </div>
