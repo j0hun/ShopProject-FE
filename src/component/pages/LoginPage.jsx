@@ -25,9 +25,9 @@ const LoginPage = () => {
         try {
             const response = await ApiService.loginUser(formData);
             if (response.status === 200) {
-                setMessage("User Successfully Loged in");
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('role', response.role);
+                setMessage(response.message);
+                localStorage.setItem('token', response.response.token);
+                localStorage.setItem('role', response.response.role);
                 setTimeout(() => {
                     navigate("/profile")
                 }, 4000)
