@@ -44,12 +44,13 @@ const Navbar = () => {
             </form>
 
             <div className="navbar-link">
-                <NavLink to="/" >Home</NavLink>
-                <NavLink to="/categories" >Categories</NavLink>
-                {isAuthenticated && <NavLink to="/profile" >My Account</NavLink>}
-                {isAdmin && <NavLink to="/admin" >Admin</NavLink>}
-                {!isAuthenticated && <NavLink to="/login" >Login</NavLink>}
-                {isAuthenticated && <NavLink onClick={handleLogout} >Logout</NavLink>}
+                <NavLink to="/categories" >카테고리</NavLink>
+                {!isAuthenticated && <NavLink to="/login" >로그인</NavLink>}
+                {!isAuthenticated && <NavLink to="/register" >회원가입</NavLink>}
+                {isAuthenticated && <NavLink onClick={handleLogout} >로그아웃</NavLink>}
+                {isAuthenticated && <NavLink to="/profile" >마이페이지</NavLink>}
+                {isAuthenticated && <NavLink to="/cart" >장바구니</NavLink>}
+                {isAdmin && <NavLink to="/admin" >관리자</NavLink>}
             </div>
         </nav>
     );
