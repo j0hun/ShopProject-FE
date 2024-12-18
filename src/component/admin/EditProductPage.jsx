@@ -17,15 +17,17 @@ const EditProductPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ApiService.getAllCategory().then((res) => setCategories(res.categoryList));
+        ApiService.getAllCategory().then((res) => setCategories(res.data));
 
         if(productId) {
-            ApiService.getProductById(productId).then((response) => {
-                setName(response.product.name);
-                setDescription(response.product.description);
-                setPrice(response.product.price);
-                setCategoryId(response.product.categoryId);
-                setImageUrl(response.product.imageUrl);
+            ApiService.getProductById(productId).then((response) => {            
+                const product = response.data;
+                console.log(product)
+                setName(product.name);
+                setDescription(product.description);
+                setPrice(product.price);
+                setCategoryId(product.category.id);
+                setImageUrl(`http://localhost:8080${product?.imageUrl}`);
             })
         }
     }, [productId]);

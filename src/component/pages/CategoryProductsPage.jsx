@@ -24,7 +24,7 @@ const CategoryProductsPage = () => {
         try {
 
             const response = await ApiService.getAllProductsByCategoryId(categoryId);
-            const allProducts = response.productList || [];
+            const allProducts = response.data || [];
             setTotalPages(Math.ceil(allProducts.length / itemsPerPage));
             setProducts(allProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
         } catch (error) {

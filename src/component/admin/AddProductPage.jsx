@@ -15,7 +15,9 @@ const AddProductPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ApiService.getAllCategory().then((res) => setCategories(res.categoryList));
+        ApiService.getAllCategory().then(
+            (res) => setCategories(res.data)
+        );
     }, []);
 
     const handleImage = (e) => {

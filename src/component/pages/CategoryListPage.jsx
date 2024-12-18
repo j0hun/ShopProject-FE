@@ -15,7 +15,7 @@ const CategoryListPage = () => {
     const fetchCategories = async () => {
         try {
             const response = await ApiService.getAllCategory();
-            setCategories(response.categoryList || [])
+            setCategories(response.data || [])
 
         } catch (err) {
 

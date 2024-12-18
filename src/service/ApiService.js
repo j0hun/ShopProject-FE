@@ -13,12 +13,12 @@ export default class ApiService {
     }
 
     static async registerUser(registeration) {
-        const response = await axios.post(`${this.BASE_URL}/auth/register`,registeration)
+        const response = await axios.post(`${this.BASE_URL}/auth/register`, registeration)
         return response.data;
     }
 
     static async loginUser(loginDetails) {
-        const response = await axios.post(`${this.BASE_URL}/auth/login`,loginDetails)
+        const response = await axios.post(`${this.BASE_URL}/auth/login`, loginDetails)
         return response.data;
     }
 
@@ -39,8 +39,8 @@ export default class ApiService {
         return response.data;
     }
 
-    static async updateProduct(productId, formData) {
-        const response = await axios.put(`${this.BASE_URL}/product/update/${productId}`, formData, {
+    static async updateProduct(formData) {
+        const response = await axios.put(`${this.BASE_URL}/product/update`, formData, {
             headers: {
                 ...this.getHeader(),
                 "Content-Type": "multipart/form-data"
@@ -131,24 +131,22 @@ export default class ApiService {
         return response.data;
     }
 
-    static async getAllOrderItemsByStatus(status) {
-        const response = await axios.get(`${this.BASE_URL}/order/filter`, {
-            headers: this.getHeader(),
-            params: { status }
-        });
-        return response.data;
-    }
-
-    static async updateOrderitemStatus(orderItemId, status) {
-        const response = await axios.get(`${this.BASE_URL}/order/update-item-status/${orderItemId}`, {
-            headers: this.getHeader(),
-            params: { status }
-        });
-        return response.data;
-    }
-
     static async saveAddress(body) {
         const response = await axios.post(`${this.BASE_URL}/address/save`, body, {
+            headers: this.getHeader()
+        })
+        return response.data;
+    }
+
+    static async createCart(productId, body) {
+        const response = await axios.post(`${this.BASE_URL}/cart/${productId}`, body, {
+            headers: this.getHeader()
+        })
+        return response.data;
+    }
+
+    static async getMyCart() {
+        const response = await axios.get(`${this.BASE_URL}/cart`, {
             headers: this.getHeader()
         })
         return response.data;

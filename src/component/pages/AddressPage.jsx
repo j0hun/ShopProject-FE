@@ -24,7 +24,7 @@ const AddressPage = () => {
     const fetchUserInfo = async () => {
         try {
             const response = await ApiService.getLoggedInUserInfo();
-            if (response.user.address) {
+            if (response.data.address) {
                 setAddress(response.user.address)
             }
         } catch (error) {

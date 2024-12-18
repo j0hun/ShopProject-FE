@@ -23,16 +23,17 @@ const Home = () => {
 
                 if (searchItem) {
                     const response = await ApiService.searchProducts(searchItem)
-                    allProducts = response.productList || [];
+                    allProducts = response.data || [];
                 } else {
                     const response = await ApiService.getAllProducts();
-                    allProducts = response.productList || [];
+                    console.log(response)
+                    allProducts = response.data || [];
                 }
 
                 setTotalPages(Math.ceil(allProducts.length / itemsPerPage))
                 setProducts(allProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage))
             } catch (error) {
-                setError(error.response?.data?.message || error.message || 'unable to fetch products')
+                setError(error.response?.data?.message || error.message || '상품을 찾을 수 없습니다.')
             }
         }
         fecthProducts();

@@ -15,8 +15,9 @@ const AdminProductPage = () => {
     const fetchProducts = async () => {
         try {
             const response = await ApiService.getAllProducts();
-            const productList = response.productList || [];
-            setTotalPages(productList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+            const productList = response.data || [];
+            setTotalPages(Math.ceil(productList.length/itemsPerPage));
+            setProducts(productList.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage));
         } catch (error) {
             setError(error.response?.data?.message || error.message || 'unable to fetch products')
         }

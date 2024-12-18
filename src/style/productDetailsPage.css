@@ -1,40 +1,121 @@
-.product-detail{
-    max-width: 350px;
-    margin: 10rem auto 10rem auto;
-    padding: 15px;
-    border: 1px solid #ccc;
+.product-detail {
+    max-width: 1200px;
+    margin: 5rem auto;
+    padding: 20px;
+    display: flex; /* 좌우 배치를 위한 flexbox */
+    gap: 30px; /* 이미지와 상품 정보 사이 여백 */
+    border: 1px solid #ddd;
     border-radius: 10px;
-    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
+}
 
+.product-img {
+    flex: 1; /* 이미지 영역 */
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-right: 1px solid #ddd; /* 좌우 구분선 */
+}
+
+.product-img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover; /* 비율 유지 */
+}
+
+.product {
+    flex: 2; /* 상품 정보 영역 */
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 15px;
 }
 
-.product-detail img{
-    width: 350px;
-    height: auto;
+.product h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.product-detail h1{
-    text-align: center;
+.product p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
 }
-.product-detail span{
-    display: block;
-    font-size: 20px;
-    color: #f68b1e;
+
+.product span {
+    font-size: 24px;
+    color: #d9534f; /* 가격 강조 색상 */
+    font-weight: bold;
+    margin-top: 10px;
 }
-.product-detail button{
-    display: block;
-    width: 100%;
-    padding: 10px;
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quantity-controls button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quantity-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+.quantity-controls span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-actions {
+    display: flex;
+    gap: 15px; /* 버튼 사이 간격 */
+    margin-top: 30px;
+}
+
+.product-actions button {
+    flex: 1; /* 버튼이 균등한 크기를 가지도록 */
+    padding: 14px;
     border: none;
     border-radius: 5px;
-    background-color: #f68b1e;
-    color: white;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
-.product-detail button:hover{
-    background-color: #8b4c0d;
+
+.product-actions .cart-btn {
+    background-color: #5cb85c; /* 장바구니 버튼 색상 */
+    color: white;
+}
+
+.product-actions .cart-btn:hover {
+    background-color: #4cae4c;
+}
+
+.product-actions .buy-btn {
+    background-color: #0275d8; /* 바로 구매 버튼 색상 */
+    color: white;
+}
+
+.product-actions .buy-btn:hover {
+    background-color: #025aa5;
 }

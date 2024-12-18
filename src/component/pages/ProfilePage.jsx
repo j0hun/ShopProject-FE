@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
         try {
             const response = await ApiService.getLoggedInUserInfo();
-            setUserInfo(response.user);
+            setUserInfo(response.data);
         } catch (error) {
             setError(error.response?.data?.message || error.message || 'Unable to fetch user info');
         }

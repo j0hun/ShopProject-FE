@@ -16,7 +16,7 @@ const EditCategory = () => {
     const fetchCategory = async () => {
         try {
             const response = await ApiService.getCategoryById(categoryId);
-            setName(response.category.name);
+            setName(response.data.name);
         } catch (error) {
             setMessage(error.response?.data?.message || error.message || "Failed to get a category by id")
             setTimeout(() => {
