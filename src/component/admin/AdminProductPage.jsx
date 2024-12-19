@@ -19,7 +19,7 @@ const AdminProductPage = () => {
             setTotalPages(Math.ceil(productList.length/itemsPerPage));
             setProducts(productList.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage));
         } catch (error) {
-            setError(error.response?.data?.message || error.message || 'unable to fetch products')
+            setError(error.response?.data?.message || error.message)
         }
     }
 
@@ -32,13 +32,13 @@ const AdminProductPage = () => {
     }
 
     const handleDelete = async (id) => {
-        const confirmed = window.confirm("Are your sure you want to delete this product?")
+        const confirmed = window.confirm("상품을 삭제하겠습니까?")
         if (confirmed) {
             try {
                 await ApiService.deleteProduct(id);
                 fetchProducts();
             } catch (error) {
-                setError(error.response?.data?.message || error.message || 'unable to delete product')
+                setError(error.response?.data?.message || error.message)
             }
         }
     }
@@ -49,14 +49,14 @@ const AdminProductPage = () => {
                 <p className="error-message">{error}</p>
             ) : (
                 <div>
-                    <h2>Products</h2>
-                    <button className="product-btn" onClick={() => { navigate('/admin/add-product') }}>Add Product</button>
+                    <h2>상품 목록</h2>
+                    <button className="product-btn" onClick={() => { navigate('/admin/add-product') }}>상품 등록</button>
                     <ul>
                         {products.map((product) => (
                             <li key={product.id}>
                                 <span>{product.name}</span>
-                                <button className="product-btn" onClick={() => handleEdit(product.id)}>Edit</button>
-                                <button className="product-btn-delete" onClick={() => handleDelete(product.id)}>Delete</button>
+                                <button className="product-btn" onClick={() => handleEdit(product.id)}>수정</button>
+                                <button className="product-btn-delete" onClick={() => handleDelete(product.id)}>삭제</button>
                             </li>
                         ))}
                     </ul>

@@ -22,7 +22,6 @@ const EditProductPage = () => {
         if(productId) {
             ApiService.getProductById(productId).then((response) => {            
                 const product = response.data;
-                console.log(product)
                 setName(product.name);
                 setDescription(product.description);
                 setPrice(product.price);
@@ -56,42 +55,42 @@ const EditProductPage = () => {
                 setTimeout(() => {
                     setMessage('')
                     navigate('/admin/products')
-                }, 3000);
+                }, 1000);
             }
         }catch(error) {
-            setMessage(error.response?.data?.message || error.message || 'unable to update product')
+            setMessage(error.response?.data?.message || error.message)
         }
     }
 
     return (
         <form onSubmit={handleSubmit} className="product-form">
-            <h2>Edit Product</h2>
+            <h2>상품 수정</h2>
             {message && <div className="message">{message}</div>}
             <input type="file" onChange={handleImageChange}/>
             {imageUrl && <img src={imageUrl} alt={name}/>}
             <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                <option value="">Select Category</option>
+                <option value="">카테고리 선택</option>
                 {categories.map((category) => (
                     <option value={category.id} key={category.id}>{category.name}</option>
                 ))}
             </select>
 
             <input type="text"
-            placeholder="Product name"
+            placeholder="상품 이름"
             value={name}
             onChange={(e) => setName(e.target.value)}/>
 
             <textarea
-            placeholder="Description"
+            placeholder="설명"
             value={description}
             onChange={(e) => setDescription(e.target.value)}/>
 
             <input type="number"
-            placeholder="Price"
+            placeholder="가격"
             value={price}
             onChange={(e) => setPrice(e.target.value)}/>
 
-            <button type="submit">Update</button>
+            <button type="submit">수정</button>
         </form>
     );
 

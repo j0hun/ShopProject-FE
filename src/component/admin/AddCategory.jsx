@@ -17,10 +17,10 @@ const AddCategory = () => {
                 setTimeout(() => {
                     setMessage('');
                     navigate("/admin/categories")
-                }, 3000);
+                }, 1000);
             }
         } catch (error) {
-            setMessage(error.response?.data?.message || error.message || "Failed to save a category")
+            setMessage(error.response?.data?.message || error.message)
         }
     }
 
@@ -28,13 +28,13 @@ const AddCategory = () => {
         <div className="add-category-page">
             {message && <p className="message">{message}</p>}
             <form onSubmit={handleSubmit} className="category-form">
-                <h2>Add Category</h2>
+                <h2>카테고리 등록</h2>
                 <input type="text"
-                    placeholder="Category Name"
+                    placeholder="카테고리 이름"
                     value={name}
                     onChange={(e) => setName(e.target.value)} />
 
-                <button type="submit">Add</button>
+                <button type="submit">등록</button>
             </form>
         </div>
     )

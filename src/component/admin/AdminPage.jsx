@@ -7,9 +7,9 @@ const AdminPage = () => {
 
     return (
         <div className="admin-page">
-            <h1>Welcome Admin</h1>
-            <button onClick={() => navigate("/admin/categories")}>Manage Categories</button>
-            <button onClick={() => navigate("/admin/products")}>Manage Products</button>
+            <h1>관리자</h1>
+            <button onClick={() => navigate("/admin/categories")}>카테고리 관리</button>
+            <button onClick={() => navigate("/admin/products")}>상품 관리</button>
         </div>
     )
 }

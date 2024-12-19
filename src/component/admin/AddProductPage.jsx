@@ -43,37 +43,37 @@ const AddProductPage = () => {
                 }, 3000);
             }
         } catch (error) {
-            setMessage(error.response?.data?.message || error.message || 'unable to upload product')
+            setMessage(error.response?.data?.message || error.message)
         }
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit} className="product-form">
-                <h2>Add Product</h2>
+                <h2>상품 등록</h2>
                 {message && <div className="message">{message}</div>}
                 <input type="file" onChange={handleImage} />
                 <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} >
-                    <option value="">Select Category</option>
+                    <option value="">카테고리 선택</option>
                     {categories.map((category) => (
                         <option value={category.id} key={category.id}>{category.name}</option>
                     ))}
                 </select>
                 <input type="text"
-                    placeholder="Product name"
+                    placeholder="상품 이름"
                     value={name}
                     onChange={(e) => setName(e.target.value)} />
 
                 <textarea
-                    placeholder="Description"
+                    placeholder="설명"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)} />
 
                 <input type="number"
-                    placeholder="price"
+                    placeholder="가격"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)} />
-                <button type="submit">Add Product</button>
+                <button type="submit">상품 등록</button>
             </form>
         </div>
     )
