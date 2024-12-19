@@ -19,74 +19,47 @@ const ProfilePage = () => {
 
         try {
             const response = await ApiService.getLoggedInUserInfo();
+            console.log(response)
             setUserInfo(response.data);
         } catch (error) {
-            setError(error.response?.data?.message || error.message || 'Unable to fetch user info');
+            setError(error.response?.data?.message || error.message);
         }
     }
 
     if (!userInfo) {
-        return <div>Loading...</div>
+        return <div>사용자 정보를 찾을 수 없습니다.</div>
     }
 
     const handleAddressClick = () => {
         navigate(userInfo.address ? '/edit-address' : '/add-address');
     }
 
-    const orderItemList = userInfo.orderItemList || [];
-
-    const totalPages = Math.ceil(orderItemList.length / itemsPerPage);
-
-    const paginatedOrders = orderItemList.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
     return (
         <div className="profile-page">
-            <h2>Welcome {userInfo.name}</h2>
+            <h2>{userInfo.name}님 환영합니다.</h2>
 
             {error ? (
                 <p className="error-message">{error}</p>
             ) : (
                 <div>
-                    <p><strong>Name: </strong>{userInfo.name}</p>
-                    <p><strong>Email: </strong>{userInfo.email}</p>
-                    <p><strong>PhoneNumber: </strong>{userInfo.phoneNumber}</p>
+                    <p><strong>이름: </strong>{userInfo.name}</p>
+                    <p><strong>이메일: </strong>{userInfo.email}</p>
+                    <p><strong>전화번호: </strong>{userInfo.phoneNumber}</p>
 
                     <div>
-                        <h3>Address</h3>
+                        <h3>주소</h3>
                         {userInfo.address ? (
                             <div>
-                                <p><strong>Street: </strong>{userInfo.address.street}</p>
-                                <p><strong>City: </strong>{userInfo.address.city}</p>
-                                <p><strong>Zip Code: </strong>{userInfo.address.zipCode}</p>
+                                <p><strong>주소: </strong>{userInfo.address.baseAddress},{userInfo.address.detailAddress}</p>
+                                <p><strong>우편번호: </strong>{userInfo.address.postalCode}</p>
                             </div>
                         ) : (
-                            <p>No Address information available</p>
+                            <p>주소가 없습니다.</p>
                         )}
                         <button className="profile-button" onClick={handleAddressClick}>
-                            {userInfo.address ? "Edit Address" : "Add Address"}
+                            {userInfo.address ? "주소 수정" : "주소 등록"}
                         </button>
-                    </div>
-                    <h3>Order History</h3>
-                    <ul>
-                        {paginatedOrders.map(order => (
-                            <li key={order.id}>
-                                <img src={`http://localhost:8080${order.product.imageUrl}`} alt={order.product.name} />
-                                <div>
-                                    <p><strong>Name: </strong>{order.product.name}</p>
-                                    <p><strong>Status: </strong>{order.status}</p>
-                                    <p><strong>Quantity: </strong>{order.quantity}</p>
-                                    <p><strong>Price: </strong>{order.price.toFixed(2)}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={(page) => setCurrentPage(page)} />
+                    </div>                
                 </div>
             )}
         </div>

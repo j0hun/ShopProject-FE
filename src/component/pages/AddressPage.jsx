@@ -6,9 +6,9 @@ import '../../style/address.css';
 const AddressPage = () => {
 
     const [address, setAddress] = useState({
-        street: '',
-        city: '',
-        zipCode: ''
+        baseAddress: '',
+        detailAddress: '',
+        postalCode: ''
     });
 
     const [error, setError] = useState(null);
@@ -25,10 +25,10 @@ const AddressPage = () => {
         try {
             const response = await ApiService.getLoggedInUserInfo();
             if (response.data.address) {
-                setAddress(response.user.address)
+                setAddress(response.data.address)
             }
         } catch (error) {
-            setError(error.response?.data?.message || error.message || 'unable to fetch user information')
+            setError(error.response?.data?.message || error.message)
         }
     };
 
@@ -46,43 +46,43 @@ const AddressPage = () => {
             await ApiService.saveAddress(address);
             navigate('/profile')
         } catch (error) {
-            setError(error.response?.data?.message || error.message || "Failed to save/update address")
+            setError(error.response?.data?.message || error.message)
         }
     }
 
     return (
         <div className="address-page">
-            <h2>{location.pathname === '/edit-address' ? 'Edit Adrress' : "Add Address"}</h2>
+            <h2>{location.pathname === '/edit-address' ? '주소 수정' : "주소 등록"}</h2>
             {error && <p className="error-message">{error}</p>}
 
             <form onSubmit={handSubmit}>
                 <label>
-                    Street:
+                    주소:
                     <input type="text"
-                        name="street"
-                        value={address.street}
+                        name="baseAddress"
+                        value={address.baseAddress}
                         onChange={handleChange}
                         required />
                 </label>
 
                 <label>
-                    City:
+                    상세 주소:
                     <input type="text"
-                        name="city"
-                        value={address.city}
+                        name="detailAddress"
+                        value={address.detailAddress}
                         onChange={handleChange}
                         required />
                 </label>
 
                 <label>
-                    Zip Code:
+                    우편번호:
                     <input type="text"
-                        name="zipCode"
-                        value={address.zipCode}
+                        name="postalCode"
+                        value={address.postalCode}
                         onChange={handleChange}
                         required />
                 </label>
-                <button type="submit">{location.pathname === '/edit-address' ? 'Edit Address' : "Save Address"}</button>
+                <button type="submit">{location.pathname === '/edit-address' ? '주소 수정' : "주소 등록"}</button>
             </form>
         </div>
     )
