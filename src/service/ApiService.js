@@ -116,17 +116,9 @@ export default class ApiService {
         return response.data;
     }
 
-    static async getAllOrders() {
-        const response = await axios.get(`${this.BASE_URL}/order/filter`, {
+    static async getOrderHistory() {
+        const response = await axios.get(`${this.BASE_URL}/order/history`, {
             headers: this.getHeader()
-        });
-        return response.data;
-    }
-
-    static async getOrderItemById(itemId) {
-        const response = await axios.get(`${this.BASE_URL}/order/filter`, {
-            headers: this.getHeader(),
-            params: { itemId }
         });
         return response.data;
     }

@@ -20,6 +20,7 @@ import AdminProductPage from './component/admin/AdminProductPage';
 import AddProductPage from './component/admin/AddProductPage';
 import EditProductPage from './component/admin/EditProductPage';
 import ChargePage from './component/pages/ChargePage';
+import OrderHistoryPage from "./component/pages/OrderHistoryPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path='/edit-address' element={<ProtectedRoute element={<AddressPage />} />} />
           <Route path='/cart' element={<ProtectedRoute element={<CartPage />} />} />
           <Route path='/charge' element={<ProtectedRoute element={<ChargePage />} />} />
+          <Route path='/orderhistory' element={<ProtectedRoute element={<OrderHistoryPage />} />} />
 
           <Route path='/admin' element={<AdminRoute element={<AdminPage />} />} />
           <Route path='/admin/categories' element={<AdminRoute element={<AdminCategoryPage />} />} />

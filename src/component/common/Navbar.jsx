@@ -50,6 +50,7 @@ const Navbar = () => {
                 {isAuthenticated && <NavLink onClick={handleLogout} >로그아웃</NavLink>}
                 {isAuthenticated && <NavLink to="/profile" >마이페이지</NavLink>}
                 {isAuthenticated && <NavLink to="/cart" >장바구니</NavLink>}
+                {isAuthenticated && <NavLink to="/orderhistory" >주문내역</NavLink>}
                 {isAdmin && <NavLink to="/admin" >관리자</NavLink>}
             </div>
         </nav>
