@@ -15,9 +15,10 @@ const CartPage = () => {
     const fetchCart = async () => {
         try {
             const response = await ApiService.getMyCart();  // getMyCart 호출하여 장바구니 데이터 가져오기
+            console.log(response.data)
             setCart(response.data);  // 가져온 데이터로 cart 상태 업데이트
         } catch (error) {
-            console.error("Failed to fetch cart", error);
+            console.error(error.response?.data?.message || error.message);
         }
     };
 
@@ -41,18 +42,17 @@ const CartPage = () => {
 
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-    const handleCheckout = async () => {
+    const handleOrder = async () => {
         if (!ApiService.isAuthenticated()) {
-            setMessage("You need to login first before you can place an order");
+            setMessage("주문을 하시려면 먼저 로그인이 필요합니다.");
             setTimeout(() => {
                 setMessage('')
                 navigate("/login")
-            }, 3000);
-            return;
+            }, 1000);
         }
 
         const orderItems = cart.map(item => ({
-            productId: item.id,
+            productId: item.product.id,
             quantity: item.quantity
         }));
 
@@ -67,33 +67,33 @@ const CartPage = () => {
 
             setTimeout(() => {
                 setMessage('');
-            }, 5000);
+            }, 1000);
 
             if (response.status === 200) {
-                setCart([]);
+                
             }
 
         } catch (error) {
-            setMessage(error.response?.data?.message || error.message || 'Failed to place an order');
+            setMessage(error.response?.data?.message || error.message);
             setTimeout(() => {
                 setMessage('');
-            }, 3000);
+            }, 1000);
         }
     };
 
     return (
         <div className="cart-page">
-            <h1>Cart</h1>
+            <h1>장바구니</h1>
             {message && <p className="response-message">{message}</p>}
 
             {cart.length === 0 ? (
-                <p>Your cart is empty</p>
+                <p>장바구니는 비어있습니다.</p>
             ) : (
                 <div>
                     <ul>
                         {cart.map(item => (
-                            <li key={item.id}>
-                                <img src={`http://localhost:8080${item?.imageUrl}`} alt={item.name} />
+                            <li key={item.id}>                            
+                                <img src={`http://localhost:8080${item.product.imageUrl}`} alt={item.name} />
                                 <div>
                                     <h2>{item.name}</h2>
                                     <p>{item.description}</p>
@@ -102,13 +102,13 @@ const CartPage = () => {
                                         <span>{item.quantity}</span>
                                         <button onClick={() => incrementItem(item)}>+</button>
                                     </div>
-                                    <span>${item.price.toFixed()}</span>
+                                    <span>{item.price.toFixed()}원</span>
                                 </div>
                             </li>
                         ))}
                     </ul>
-                    <h2>Total: ${totalPrice.toFixed(2)}</h2>
-                    <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+                    <h2>총액: {totalPrice}원</h2>
+                    <button className="checkout-button" onClick={handleOrder}>주문하기</button>
                 </div>
             )}
         </div>
