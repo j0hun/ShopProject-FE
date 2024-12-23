@@ -19,6 +19,7 @@ import EditCategory from './component/admin/EditCategory';
 import AdminProductPage from './component/admin/AdminProductPage';
 import AddProductPage from './component/admin/AddProductPage';
 import EditProductPage from './component/admin/EditProductPage';
+import ChargePage from './component/pages/ChargePage';
 
 function App() {
   return (
@@ -28,14 +29,15 @@ function App() {
           <Route exact path='/' element={<Home />} />
           <Route path='/product/:productId' element={<ProductDetailsPage />} />
           <Route path='/categories' element={<CategoryListPage />} />
-          <Route path='/category/:categoryId' element={<CategoryProductsPage />} />
-          <Route path='/cart' element={<CartPage />} />
+          <Route path='/category/:categoryId' element={<CategoryProductsPage />} />          
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/login' element={<LoginPage />} />
 
           <Route path='/profile' element={<ProtectedRoute element={<ProfilePage />} />} />
           <Route path='/add-address' element={<ProtectedRoute element={<AddressPage />} />} />
           <Route path='/edit-address' element={<ProtectedRoute element={<AddressPage />} />} />
+          <Route path='/cart' element={<ProtectedRoute element={<CartPage />} />} />
+          <Route path='/charge' element={<ProtectedRoute element={<ChargePage />} />} />
 
           <Route path='/admin' element={<AdminRoute element={<AdminPage />} />} />
           <Route path='/admin/categories' element={<AdminRoute element={<AdminCategoryPage />} />} />

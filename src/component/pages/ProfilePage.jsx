@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import '../../style/profile.css';
-import Pagination from "../common/Pagination";
 
 const ProfilePage = () => {
 
     const [userInfo, setUserInfo] = useState(null);
     const [error, setError] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,6 +31,10 @@ const ProfilePage = () => {
         navigate(userInfo.address ? '/edit-address' : '/add-address');
     }
 
+    const handleChargeClick = () => {
+        navigate('/charge');
+    }
+
     return (
         <div className="profile-page">
             <h2>{userInfo.name}님 환영합니다.</h2>
@@ -45,7 +46,7 @@ const ProfilePage = () => {
                     <p><strong>이름: </strong>{userInfo.name}</p>
                     <p><strong>이메일: </strong>{userInfo.email}</p>
                     <p><strong>전화번호: </strong>{userInfo.phoneNumber}</p>
-
+                    <p><strong>잔액: </strong>{userInfo.balance} <button className="profile-button" onClick={handleChargeClick}>충전하기</button></p>
                     <div>
                         <h3>주소</h3>
                         {userInfo.address ? (

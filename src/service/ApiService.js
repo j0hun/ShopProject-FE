@@ -152,6 +152,13 @@ export default class ApiService {
         return response.data;
     }
 
+    static async createCharge(body) {
+        const response = await axios.post(`${this.BASE_URL}/charge/create`, body, {
+            headers: this.getHeader()
+        })
+        return response.data;
+    }
+
     static logout() {
         localStorage.removeItem('token')
         localStorage.removeItem('role')

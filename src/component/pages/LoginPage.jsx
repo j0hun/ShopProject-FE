@@ -34,7 +34,7 @@ const LoginPage = () => {
                 }, 1000)
             }
         } catch (error) {
-            setMessage(error.response?.data.message || error.message || "로그인 할 수 없습니다.");
+            setMessage(error.response?.data.message || error.message);
         }
     }
 
