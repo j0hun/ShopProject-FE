@@ -57,8 +57,8 @@ const CartPage = () => {
         }));
 
         const orderRequest = {
-            totalPrice,
             items: orderItems,
+            orderType:"order"
         };
 
         try {

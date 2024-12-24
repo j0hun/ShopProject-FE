@@ -11,6 +11,7 @@ const AddProductPage = () => {
     const [description, setDescription] = useState('');
     const [message, setMessage] = useState('');
     const [price, setPrice] = useState('');
+    const [stock, setStock] = useState('');
 
     const navigate = useNavigate();
 
@@ -33,6 +34,7 @@ const AddProductPage = () => {
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
+            formData.append('stock', stock);
 
             const response = await ApiService.addProduct(formData);
             if (response.status === 200) {
@@ -40,7 +42,7 @@ const AddProductPage = () => {
                 setTimeout(() => {
                     setMessage('');
                     navigate('/admin/products')
-                }, 3000);
+                }, 1000);
             }
         } catch (error) {
             setMessage(error.response?.data?.message || error.message)
@@ -73,6 +75,11 @@ const AddProductPage = () => {
                     placeholder="가격"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)} />
+
+                <input type="number"
+                    placeholder="재고"
+                    value={stock}
+                    onChange={(e) => setStock(e.target.value)} />
                 <button type="submit">상품 등록</button>
             </form>
         </div>

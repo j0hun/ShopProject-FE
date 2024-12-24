@@ -1,70 +1,77 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import ApiService from "../../service/ApiService";
-import Pagination from "../common/Pagination";
 import '../../style/orderHistoryPage.css';
 
 const OrderHistoryPage = () => {
 
-    const [orderHistory, setOrderHistory] = useState([]);
+    const [orderItems, setOrderItems] = useState([]);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
-        fetchOrderHistory();
-    },[]);
+        fetchOrderItems();
+    }, []);
 
-    const fetchOrderHistory = async () => {
+    const fetchOrderItems = async () => {
         try {
-            const response = await ApiService.getOrderHistory();
+            const response = await ApiService.getOrderHistory(); 
             console.log(response.data);
-            setOrderHistory(response.data);
-        }catch(error) {
+            setOrderItems(response.data);
+        } catch (error) {
+            setError(error.response?.data?.message || error.message);
+        }
+    };
+
+    const handleCancelOrderItem = async (orderItemId) => {       
+        try {            
+            // 주문 취소 API 호출
+            await ApiService.cancelOrderItem(orderItemId);
+            alert("주문이 취소되었습니다.");
+            fetchOrderItems();
+        } catch (error) {
             setError(error.response?.data?.message || error.message);
         }
     };
 
     return (
         <div className="order-history-page">
-            <h1>주문 내역</h1>
+            <h1>주문 상품 내역</h1>
 
             {error && <p className="error-message">{error}</p>}
 
-            {orderHistory.length === 0 ? (
-                <p>주문 내역이 없습니다.</p>
+            {orderItems.length === 0 ? (
+                <p>주문 상품 내역이 없습니다.</p>
             ) : (
                 <div>
-                    {orderHistory.map((order) => (
-                        <div key={order.id} className="order-card">
-                            <h3>주문 ID: {order.id}</h3>
-                            <p>총액: {order.totalPrice}원</p>
+                    {orderItems.map((item) => (
+                        <div key={item.id} className="order-card">
                             <div>
-                                <h4>주문 아이템</h4>
                                 <ul>
-                                    {order.orderItemList.map((item) => (
-                                        <li key={item.id} className="order-item">
-                                            <img src={`http://localhost:8080${item.product.imageUrl}`} alt={item.product.name} className="product-image" />
-                                            <div className="order-item-info">
-                                                <h5>{item.product.name}</h5>
-                                                <p>상품 설명: {item.product.description}</p>
-                                                <p>가격: {item.price}원</p>
-                                                <p>수량: {item.quantity}</p>
-                                                <p>상태: {item.status}</p>
-                                            </div>
-                                        </li>
-                                    ))}
+                                    <li className="order-item">
+                                        <img src={`http://localhost:8080${item.product.imageUrl}`} alt={item.product.name} className="product-image" />
+                                        <div className="order-item-info">
+                                            <h5>{item.product.name}</h5>
+                                            <p>상품 설명: {item.product.description}</p>
+                                            <p>가격: {item.price}원</p>
+                                            <p>수량: {item.quantity}</p>
+                                            <p>합계: {item.price * item.quantity}</p>
+                                            <p>상태: {item.status}</p>
+                                            <button 
+                                                className="cancel-btn"
+                                                onClick={() => handleCancelOrderItem(item.id)}
+                                                disabled={item.status !== 'COMPLETED'} // 주문 취소 가능한 상태일 때만 버튼 활성화
+                                            >
+                                                주문 취소
+                                            </button>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     ))}
                 </div>
             )}
-
-            {/* Pagination 컴포넌트가 필요하다면 여기에 추가 */}
-            {/* <Pagination currentPage={currentPage} totalPages={totalPages} /> */}
         </div>
     );
-
 }
 
 export default OrderHistoryPage;

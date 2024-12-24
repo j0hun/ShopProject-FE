@@ -123,6 +123,13 @@ export default class ApiService {
         return response.data;
     }
 
+    static async cancelOrderItem(orderItemId) {
+        const response = await axios.post(`${this.BASE_URL}/order/item-cancel/${orderItemId}`, {}, {        
+            headers: this.getHeader()
+        });
+        return response.data;
+    }
+
     static async saveAddress(body) {
         const response = await axios.post(`${this.BASE_URL}/address/save`, body, {
             headers: this.getHeader()
