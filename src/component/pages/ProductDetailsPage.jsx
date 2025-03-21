@@ -93,7 +93,7 @@ const ProductDetailsPage = () => {
     return (
         <div className="product-detail">
             <div className="product-img">
-                <img src={`http://localhost:8080${product?.imageUrl}`} alt={product?.name} className="product-image" />
+                <img src={product?.imageUrl} alt={product?.name} className="product-image" />
             </div>
             <div className="product">
                 <h1>{product?.name}</h1>
